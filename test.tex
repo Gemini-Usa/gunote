@@ -1,0 +1,140 @@
+\documentclass{gunote}
+% preamble
+\usepackage{amsmath, tabularray, hyperref}
+\newminted{latex}{rulecolor=mahiropink2}
+\newminted{cpp}{rulecolor=mahirodark}
+\newminted{python}{rulecolor=asahigreen}
+\newminted{text}{rulecolor=asahibrown}
+\title{gunote \LaTeX{}笔记模板}
+\author{Gemini Usagi，School of Geodesy and Geodetic，Wuhan Univeristy}
+\date{\today}
+
+\newcommand{\cmd}[1]{\texttt{\backslash #1}}
+\def\mbi{\symbfit}
+\def\mbu{\symbf}
+% main
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{字体测试}
+\textsf{gunote}模板为自用模板，基于\textsf{fontspec}宏包、\textsf{unicode-math}宏包和\textsf{ctex}宏包进行了自定义的字体设置。
+\subsection{英文字体}
+英文字体设置，罗马字族设置为TeX Gyre Pagella，该字体大多数\TeX{}Live发行版的用户应该都有，在命令行中输入
+\begin{minted}{text}
+fc-match -v 'TeX Gyre Pagella'
+\end{minted}
+可以查看自己是否拥有字体，以及字体所在的路径。
+\begin{minted}{latex}
+\setmainfont{TeX Gyre Pagella}
+\end{minted}
+由于TeX Gyre Pagella字体具有\texttt{-regular}、\texttt{-bold}、\texttt{-italic}和\texttt{-bolditalic}的设计，因此使用命令
+\begin{minted}{latex}
+\textbf{some text}
+\textit{some text}
+{\bfseries\itshape some text}
+\end{minted}
+可以分别得到如下的效果：\textbf{some text}\quad\textit{some text}\quad{\bfseries\itshape some text}.
+
+无衬线字族设置为\textsf{Gill Sans MT}，打字机字族设置为\texttt{JetBrains Mono}，前者为Windows平台下的默认字体，后者为JetBrains公司开发的免费开源字体\footnote{下载网址：\url{https://www.jetbrains.com/zh-cn/lp/mono/}}。
+\subsection{数学字体}
+通过\textsf{unicode-math}宏包提供的\cmd{setmathfont}命令可以很方便地设置数学字体，本模板使用的数学字体为TeX Gyre Pagella Math，效果如下：
+{
+\def\rcv{\mathrm{r}}
+\def\sat{\mathrm{s}}
+\begin{gather}
+  p_{\rcv,j}^\sat=\rho_\rcv^\sat+c(dt_\rcv-dt^\sat)+T_\rcv^\sat+I_{\rcv,j}^\sat+e_{\rcv,j}^\sat,\\
+  \varphi_{\rcv,j}^\sat=\rho_\rcv^\sat+c(dt_\rcv-dt^\sat)+T_\rcv^\sat-I_{\rcv,j}^\sat+\lambda_j N_{\rcv,j}^\sat+\varepsilon_{\rcv,j}^\sat.
+\end{gather}
+}
+
+在矩阵和向量的表示上，作者所在的专业往往采用加粗的方式。得益于\textsf{unicode-math}宏包对数学字体的处理机制，推荐使用\cmd{symbfit}命令得到粗斜数学字体。
+\begin{gather}
+  \hat{\mbi{x}}_{k\mid k-1}=\mbi{\Phi}_{k\mid k-1}\hat{\mbi{x}}_{k-1},\\
+  \hat{\mbi{P}}_{k\mid k-1}=\mbi{\Phi}_{k\mid k-1}\hat{\mbi{P}}_{k-1}\mbi{\Phi}_{k\mid k-1}^\top+\mbi{Q}_k.
+\end{gather}
+有时习惯采用直立而非倾斜的数学字体，推荐使用\cmd{symbf}命令
+\begin{gather}
+  \hat{\mbu{x}}_{k\mid k-1}=\mbu{\Phi}_{k\mid k-1}\hat{\mbu{x}}_{k-1},\\
+  \hat{\mbu{P}}_{k\mid k-1}=\mbu{\Phi}_{k\mid k-1}\hat{\mbu{P}}_{k-1}\mbu{\Phi}_{k\mid k-1}^\top+\mbu{Q}_k.
+\end{gather}
+\subsection{中文字体}
+中文字体通过\textsf{ctex}宏包对\textsf{xeCJK}宏包内容的调用，以及预定义的一些命令，实现自定义中文字体。通过输入
+\begin{minted}{latex}
+\LoadClass[fontset=none]{ctexart}
+\end{minted}
+实现对\textsf{ctex}宏包的调用，同时声明自定义字体。中文默认宋体字族为思源宋体Source Han Serif CN，黑体字族为苹方字体.PingFang SC，楷体字族为系统默认楷体KaiTi.
+
+文中的很多场合需要用到加粗的文字来表示强调，此时推荐使用
+\begin{minted}{latex}
+\textbf{强调文字}
+\end{minted}
+来实现，效果：\textbf{强调文字}。此时使用的是思源宋体的Bold样式。
+
+如果习惯于Word那样黑体加粗的格式，可以使用
+\begin{minted}{latex}
+{\bfseries\sffamily 黑体加粗}
+% 或者
+\textbf{\heiti 黑体加粗}
+\end{minted}
+来实现，效果：{\bfseries\sffamily 黑体加粗}。此时使用的是苹方字体的Medium样式。
+\section{颜色测试}
+作者基于\textsf{xcolor}宏包，参考Onimai Character\footnote{\url{https://onimai.jp/character/}}设计了部分颜色，并定义了一些颜色命令，如果你希望在文档中使用这些颜色，请参照表\ref{tab:color}：
+\begin{table}[htbp]
+  \centering
+  \caption{\label{tab:color} 预定义颜色}
+  \begin{tblr}{
+    colspec={cccc|cccc},
+    cell{2}{1}={r=5}{c},
+    cell{2}{3}={mahirolight},
+    cell{3}{3}={mahirodark},
+    cell{4}{3}={mahiropink1},
+    cell{5}{3}={mahiropink2},
+    cell{6}{3}={mahirogray},
+    cell{3}{5}={r=3}{c},
+    cell{3}{7}={miharigold},
+    cell{4}{7}={miharipurple},
+    cell{5}{7}={miharired},
+    cell{7}{1}={r=2}{c},
+    cell{7}{3}={momijibrown},
+    cell{8}{3}={momijiblue},
+    cell{7}{5}={r=2}{c},
+    cell{7}{7}={kaedepink},
+    cell{8}{7}={kaedeblue},
+    cell{9}{1}={r=2}{c},
+    cell{9}{3}={asahibrown},
+    cell{10}{3}={asahigreen},
+    cell{9}{5}={r=2}{c},
+    cell{9}{7}={miyopurple},
+    cell{10}{7}={miyoyellow}
+  }
+    \hline
+    取材角色 & 名称 & 预览 & RGB值 & 取材角色 & 名称 & 预览 & RGB值 \\
+    \hline
+    緒山まひろ & mahirolight &  & 228,243,248 &  &  &  &  \\
+     & mahirogray &  & 133,149,174 & 緒山みはり & miharigold &  & 245,195,134 \\
+     & mahiropink1 &  & 234,157,169 &  & miharipurple &  & 221,157,240 \\
+     & mahiropink2 &  & 234,212,207 &  & miharired &  & 234,140,156 \\
+     & mahirodark &  & 125,134,156 &  &  &  &  \\
+    \hline 
+    穂月もみじ & momijibrown &  & 151,119,128 & 穂月かえで & kaedepink &  & 241,172,184 \\
+     & momijiblue &  & 152,213,238 &  & kaedeblue &  & 103,210,231 \\
+    \hline
+    桜花あさひ & asahibrown &  & 188,153,134 & 室崎みよ & miyopurple &  & 185,133,145 \\
+     & asahigreen &  & 119,147,109 &  & miyoyellow &  & 254,234,153 \\
+    \hline
+  \end{tblr}
+\end{table}
+部分颜色被有机地穿插进了文档的各个元素中。
+\section{自定义环境测试}
+\subsection{代码环境}
+\textsf{gunote}模板对代码环境进行了简单的设定，基于\textsf{minted}宏包。效果如下：
+\begin{minted}[highlightlines=5]{latex}
+\doucumentclass{gunote} % gunote template
+% preamble
+\begin{document}
+% main
+  \textcolor{mahirogray}{some text} % highlight here
+\end{document}
+\end{minted}
+\end{document}
