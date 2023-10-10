@@ -8,7 +8,7 @@
 % Package dependencies
 %
 \RequirePackage[margin=2cm]{geometry}
-\RequirePackage{unicode-math}
+\RequirePackage[math-style=ISO]{unicode-math}
 \RequirePackage{tocloft}
 \RequirePackage{xcolor}
 \RequirePackage{caption}
@@ -25,6 +25,7 @@
 \setsansfont{Gill Sans MT}
 \setmonofont{JetBrains Mono}
 \setmathfont{TeX Gyre Pagella Math}
+\setmathfont{Latin Modern Math}[range=cal]
 \setCJKmainfont{Source Han Serif CN}[BoldFont=Source Han Serif CN Bold, ItalicFont=KaiTi]
 \setCJKsansfont{.PingFang SC}[BoldFont=.PingFang SC Medium]
 \setCJKmonofont{DengXian}
