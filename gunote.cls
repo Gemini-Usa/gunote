@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{gunote}[2023/07/22 Gemini Usagi LaTeX class for noting]
+\ProvidesClass{gunote}[2023/10/11 Gemini Usagi LaTeX class for noting]
 %
 % Based on ctexart documentclass
 %
