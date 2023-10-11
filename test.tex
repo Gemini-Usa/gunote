@@ -6,7 +6,7 @@
 \newminted{python}{rulecolor=asahigreen}
 \newminted{text}{rulecolor=asahibrown}
 \title{gunote \LaTeX{}笔记模板}
-\author{Gemini Usagi，School of Geodesy and Geodetic，Wuhan Univeristy}
+\author{Gemini Usagi，School of Geodesy and Geodetic，Wuhan University}
 \date{\today}
 
 \newcommand{\cmd}[1]{\texttt{\backslash #1}}
@@ -58,6 +58,11 @@ fc-match -v 'TeX Gyre Pagella'
   \hat{\mbu{x}}_{k\mid k-1}=\mbu{\Phi}_{k\mid k-1}\hat{\mbu{x}}_{k-1},\\
   \hat{\mbu{P}}_{k\mid k-1}=\mbu{\Phi}_{k\mid k-1}\hat{\mbu{P}}_{k-1}\mbu{\Phi}_{k\mid k-1}^\top+\mbu{Q}_k.
 \end{gather}
+
+特别地，对于数学书法体（caligraphy），模板单独采用原生的Latin Modern Math：
+\begin{equation}
+  \symcal{P}_{\symup{HMI}}=\symcal{P}\left(\vert x-\hat{x}\vert>\symup{PL},\vert q\vert<T\right).
+\end{equation}
 \subsection{中文字体}
 中文字体通过\textsf{ctex}宏包对\textsf{xeCJK}宏包内容的调用，以及预定义的一些命令，实现自定义中文字体。通过输入
 \begin{minted}{latex}
@@ -78,6 +83,46 @@ fc-match -v 'TeX Gyre Pagella'
 \textbf{\heiti 黑体加粗}
 \end{minted}
 来实现，效果：{\bfseries\sffamily 黑体加粗}。此时使用的是苹方字体的Medium样式。
+\subsection{日文字体}
+作者并不了解\LaTeX{}日文排版或是多语言混合排版的相关领域，暂且只将平假名和片假名罗列至此。
+\begin{table}[ht]
+  \centering
+  \caption{\label{tab:hiragana} 平假名一览}
+  \begin{tblr}{colspec=cccccccccccc}
+    \hline
+    \textbf{ん}行 & \textbf{わ}行 & \textbf{ら}行 & \textbf{や}行 & \textbf{ま}行 & \textbf{は}行 & \textbf{な}行 & \textbf{た}行 & \textbf{さ}行 & \textbf{か}行 & \textbf{あ}行 & \\
+    \hline
+    ん & わ & ら & や & ま & は & な & た & さ & か & あ & あ段 \\
+    \hline
+     &  & り &  & み & ひ & に & ち & し & き & い & い段 \\
+    \hline
+     &  & る & ゆ & む & ふ & ぬ & つ & す & く & う & う段 \\
+    \hline
+     &  & れ &  & め & へ & ね & て & せ & け & え & え段 \\
+    \hline
+     & を & ろ & よ & も & ほ & の & と & そ & こ & お & お段 \\
+    \hline 
+  \end{tblr}
+\end{table}
+\begin{table}[ht]
+  \centering
+  \caption{\label{tab:katakana} 片假名一览}
+  \begin{tblr}{colspec=cccccccccccc}
+    \hline
+    \textbf{ン}行 & \textbf{ワ}行 & \textbf{ラ}行 & \textbf{ヤ}行 & \textbf{マ}行 & \textbf{ハ}行 & \textbf{ナ}行 & \textbf{タ}行 & \textbf{サ}行 & \textbf{カ}行 & \textbf{ア}行 & \\
+    \hline
+    ン & ワ & ラ & ヤ & マ & ハ & ナ & タ & サ & カ & ア & ア段 \\
+    \hline
+     &  & リ &  & ミ & ヒ & ニ & チ & シ & キ & イ & イ段 \\
+    \hline
+     &  & ル & ユ & ム & フ & ヌ & ツ & ス & ク & ウ & ウ段 \\
+    \hline
+     &  & レ &  & メ & ヘ & ヌ & テ & セ & ケ & エ & エ段 \\
+    \hline
+     & ヲ & ロ & ヨ & モ & ホ & ノ & ト & ソ & コ & オ & オ段 \\
+    \hline 
+  \end{tblr}
+\end{table}
 \section{颜色测试}
 作者基于\textsf{xcolor}宏包，参考Onimai Character\footnote{\url{https://onimai.jp/character/}}设计了部分颜色，并定义了一些颜色命令，如果你希望在文档中使用这些颜色，请参照表\ref{tab:color}：
 \begin{table}[htbp]
