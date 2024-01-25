@@ -18,7 +18,7 @@
 \begin{document}
 \maketitle
 \tableofcontents
-
+\chapter{章节测试}
 \section{字体测试}
 \textsf{gunote}模板为自用模板，基于\textsf{fontspec}宏包、\textsf{unicode-math}宏包和\textsf{ctex}宏包进行了自定义的字体设置。
 \subsection{英文字体}
@@ -68,7 +68,7 @@ fc-match -v 'TeX Gyre Pagella'
 \subsection{中文字体}
 中文字体通过\textsf{ctex}宏包对\textsf{xeCJK}宏包内容的调用，以及预定义的一些命令，实现自定义中文字体。通过输入
 \begin{Code*}[latex]
-\LoadClass[fontset=none]{ctexart}
+\LoadClass[fontset=none]{ctexrep}
 \end{Code*}
 实现对\textsf{ctex}宏包的调用，同时声明自定义字体。中文默认宋体字族为思源宋体Source Han Serif CN，黑体字族为苹方字体.PingFang SC，楷体字族为系统默认楷体KaiTi.
 
@@ -183,23 +183,7 @@ fc-match -v 'TeX Gyre Pagella'
 
   如图所示的$S^1$流形是一个复平面$\symbb{C}$上的单位圆，流形上存在着单位复数$\symbf{z}^*\symbf{z}=1$.李代数$\symfrak{s}^1=T_{\symcal{E}}S^1$是虚轴$i\symbb{R}$（标红），任何切空间$TS^1$都是直线$\symbb{R}$的同构。切向量（红色部分）所包围的流形对应了一段圆弧（蓝色部分）。
   \tcblower
-  \pgfmathsetmacro{\arc}{4*sin(22.5)}
-  \begin{tikzpicture}[x=.8cm, y=.8cm]
-    \draw[momijiblue] (0,0) circle (2);
-    \draw[red] (2,-2) node[right, black] {$T_1S^1=i\symbb{R}\cong\symbb{R}$} -- (2,2);
-    \draw[arrows={-Stealth[harpoon, swap]}] ({sqrt(2)},{sqrt(2)}) arc (112.5:90:\arc) node[right] {$\log$};
-    \node at (2,1.42) [above=1em, right=1pt] {$\exp$};
-    \draw[arrows={-Stealth[harpoon, swap]}] (2,{\arc+0.1}) arc (90:112.5:\arc);
-    \node[draw, line width=0.25mm, circle, inner sep=1pt, fill=asahigreen!5] (A) at (2,0) {};
-    \node[draw, line width=0.1mm, circle, inner sep=1pt, fill=asahigreen!5] (C) at (0,2) {};
-    \node[draw=blue, line width=0.25mm, circle, inner sep=1pt, fill=asahigreen!5] (B) at ({sqrt(2)},{sqrt(2)}) {};
-    \draw (0,0) -- (A) node[right=1em, black] {1};
-    \draw[blue] (0,0) -- (B) node[left=1em] {$\symbf{z}$};
-    \node at (0,0) [below=1em, align=center] {$\symbf{z}=\exp(i\theta)$\\$i\theta=\log(\symbf{z})$};
-    \node at (C) [below] {$i$};
-    \node at (135:2) [above left] {$S^1$};
-    \draw[red, line width=0.25mm] (A) -- ++(0,\arc) node[midway, right, black] {$\theta$};
-  \end{tikzpicture}
+  \includegraphics{picture/manifold.pdf}
 \end{Example}
 \subsection{代码环境}
 模板基于\textsf{tcolorbox}宏包和\textsf{minted}宏包定义了下面的代码环境\textsf{Code}，效果如下：

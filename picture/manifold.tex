@@ -1,0 +1,22 @@
+\documentclass{standalone}
+\usepackage{amsmath, tikz, unicode-math}
+\usetikzlibrary{calc, arrows.meta}
+\begin{document}
+\pgfmathsetmacro{\arc}{4*sin(22.5)}
+\begin{tikzpicture}
+    \draw[blue] (0,0) circle (2);
+    \draw[red] (2,-2) node[right, black] {$T_1S^1=i\symbb{R}\cong\symbb{R}$} -- (2,2);
+    \draw[arrows={-Stealth[harpoon, swap]}] ({sqrt(2)},{sqrt(2)}) arc (112.5:90:\arc) node[right] {$\log$};
+    \node at (2,1.42) [above=1em, right=1pt] {$\exp$};
+    \draw[arrows={-Stealth[harpoon, swap]}] (2,{\arc+0.1}) arc (90:112.5:\arc);
+    \node[draw, line width=0.25mm, circle, inner sep=1pt, fill=green!5] (A) at (2,0) {};
+    \node[draw, line width=0.1mm, circle, inner sep=1pt, fill=green!5] (C) at (0,2) {};
+    \node[draw=blue, line width=0.25mm, circle, inner sep=1pt, fill=green!5] (B) at ({sqrt(2)},{sqrt(2)}) {};
+    \draw (0,0) -- (A) node[right=1em, black] {1};
+    \draw[blue] (0,0) -- (B) node[left=1em] {$\symbf{z}$};
+    \node at (0,0) [below=1em, align=center] {$\symbf{z}=\exp(i\theta)$\\$i\theta=\log(\symbf{z})$};
+    \node at (C) [below] {$i$};
+    \node at (135:2) [above left] {$S^1$};
+    \draw[red, line width=0.25mm] (A) -- ++(0,\arc) node[midway, right, black] {$\theta$};
+\end{tikzpicture}
+\end{document}

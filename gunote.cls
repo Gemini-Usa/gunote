@@ -1,9 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{gunote}[2023/11/29 Gemini Usagi LaTeX class for noting]
+\ProvidesClass{gunote}[2024/01/25 Gemini Usagi LaTeX class for noting]
 %
-% Based on ctexart documentclass
+% Based on ctexrep documentclass
 %
-\LoadClass[fontset=none, punct=CCT]{ctexart}
+\LoadClass[fontset=none, punct=CCT]{ctexrep}
 %
 % Package dependencies
 %
@@ -89,6 +89,7 @@
 %
 \ctexset{
   part/format+=\color{mahirogray},
+  chapter/format+=\color{mahirogray},
   section/format+=\raggedright\color{mahirogray},
   subsection/format+=\color{mahirogray},
   subsubsection/format+=\color{mahirogray}
