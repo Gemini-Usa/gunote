@@ -185,6 +185,27 @@ fc-match -v 'TeX Gyre Pagella'
   \tcblower
   \includegraphics{picture/manifold.pdf}
 \end{Example}
+\subsubsection{Definition环境}
+样例如下：
+\begin{Definition}{数域}{field}
+  设 $\symbb{K}$ 是复数集 $\symbb{C}$ 的子集且至少有两个不同的元素，如果 $\symbb{K}$ 中任意两个数的加法、减法、乘法和除法（除数不为零）仍属于 $\symbb{K}$ ，则称 $\symbb{K}$ 是一个数域。
+\end{Definition}
+\subsubsection{Theorem环境}
+样例如下：
+\begin{Theorem}{}{number field}
+  任一数域必包含有理数域 $\symbb{Q}$ .
+\end{Theorem}
+\subsubsection{Proof环境和QED符号}
+\textsf{Proof}环境比较灵活，由下面的定义得到：
+\begin{Code*}[latex]
+\newcommand{\QEDsymbol}{\hfill$\square$}
+\newenvironment{Proof}{\textbf{证：}}{\QEDsymbol} % Proof env
+\end{Code*}
+因此该环境不进行换行。除此之外，模板还提供了 \textsf{\backslash QEDsymbol} 命令表示证毕符号。样例如下：
+
+\begin{Proof}
+  由上面知道，$1$ 必属于任一数域。将 $1$ 连加 $n$ 次，则 $n$ 也应属于该属于，因此任一正整数属于该数域。又 $0-n=-n$ ，因此 $-n$ 也应在此数域中。因而整数全体都必须在这个数域之中。最后，若 $m\neq 0$,\ $m$,\ $n$ 为整数，则由除法封闭性可知 $\frac{n}{m}$ 也应属于该数域，即任一有理数都应在此数域中。
+\end{Proof}
 \subsection{代码环境}
 模板基于\textsf{tcolorbox}宏包和\textsf{minted}宏包定义了下面的代码环境\textsf{Code}，效果如下：
 \begin{Code}{test.tex}

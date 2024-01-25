@@ -8,6 +8,7 @@
 % Package dependencies
 %
 \RequirePackage{geometry}
+\RequirePackage{amssymb}
 \RequirePackage[math-style=ISO]{unicode-math}
 \RequirePackage{tocloft}
 \RequirePackage{xcolor}
@@ -125,14 +126,26 @@
   }
 }
 %
-% Math environment and numbering
+% Math things
 %
 \numberwithin{equation}{section}
+\newcommand{\QEDsymbol}{\hfill$\square$}
 \newtcbtheorem[number within=section]{Example}{例}{%
   general,
   colback=asahigreen!5, 
   colframe=asahigreen
 }{eg} % Example env
+\newtcbtheorem[number within=section]{Definition}{定义}{%
+  general,
+  colback=miharipurple!5,
+  colframe=miharipurple
+}{def} % Definition env
+\newtcbtheorem[number within=section]{Theorem}{定理}{%
+  general,
+  colback=miharigold!5,
+  colframe=miharigold
+}{thm} % Definition env
+\newenvironment{Proof}{\textbf{证：}}{\QEDsymbol} % Proof env
 %
 % Code environment based on tcolorbox
 %
