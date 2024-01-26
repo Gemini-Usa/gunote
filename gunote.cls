@@ -144,7 +144,12 @@
   general,
   colback=miharigold!5,
   colframe=miharigold
-}{thm} % Definition env
+}{thm} % Theorem env
+\newtcbtheorem[number within=section]{Proposition}{命题}{%
+general,
+colback=asahibrown!5,
+colframe=asahibrown
+}{thm} % Proposition env
 \newenvironment{Proof}{\textbf{证：}}{\QEDsymbol} % Proof env
 %
 % Code environment based on tcolorbox
