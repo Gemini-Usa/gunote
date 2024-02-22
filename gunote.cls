@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{gunote}[2024/01/25 Gemini Usagi LaTeX class for noting]
+\ProvidesClass{gunote}[2024/02/22 Gemini Usagi LaTeX class for noting]
 %
 % Based on ctexrep documentclass
 %
@@ -14,7 +14,8 @@
 \RequirePackage{xcolor}
 \RequirePackage{caption}
 \RequirePackage{minted}
-\RequirePackage[theorems, breakable, minted]{tcolorbox}
+\RequirePackage[theorems, breakable, minted, skins]{tcolorbox}
+\RequirePackage{fancyhdr}
 %
 % Options
 %
@@ -72,25 +73,42 @@
   \newpage
   \vspace*{2cm}
   {\raggedright\sffamily\Huge \@title\par}
-  {\raggedright \textcolor{momijiblue}{\rule{0.8\linewidth}{2pt}}\par}
+  {\raggedright \textcolor{momijiblue}{\rule{\linewidth}{2pt}}\par}
   \medskip
   {\raggedright\normalsize \@date\par}
   \bigskip
   {\raggedleft\large \@author\par}
   \vspace*{2cm}
-  \thispagestyle{plain}
+  \thispagestyle{empty}
 }
 %
 % Table of contents
 %
-\renewcommand{\cfttoctitlefont}{\huge\bfseries\color{mahirogray}}
+\renewcommand{\cfttoctitlefont}{\Huge\bfseries\color{mahirogray}}
+\renewcommand\cftaftertoctitle{\par\textcolor{momijiblue}{\rule{\linewidth}{2pt}}\par}
 \setlength{\cftaftertoctitleskip}{5ex}
+%
+% Header and footer setting based on fancyhdr
+%
+\pagestyle{fancy}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+\fancyhead[L]{}
+\fancyhead[C]{\heiti{\rightmark}}
+\fancyhead[R]{\cdot\ \thepage\ \cdot}
+\fancyfoot[C]{}
+\setlength{\headheight}{14pt}
 %
 % Chapter format setting
 %
 \ctexset{
   part/format+=\color{mahirogray},
-  chapter/format+=\color{mahirogray},
+  chapter={
+    format+=\Huge\raggedright\color{mahirogray},
+    aftertitle=\par\bigskip\nointerlineskip\textcolor{momijiblue}{\rule{\linewidth}{2pt}}\par
+  },
   section/format+=\raggedright\color{mahirogray},
   subsection/format+=\color{mahirogray},
   subsubsection/format+=\color{mahirogray}
@@ -112,9 +130,12 @@
     leftrule=3pt,
     toprule=0pt,
     bottomrule=0pt,
+    titlerule=0pt,
     sharp corners,
     fonttitle=\bfseries,
-    breakable
+    breakable,
+    colback=white,
+    colbacktitle=white
   },
   default minted options={
     autogobble,
@@ -122,7 +143,8 @@
     breaklines,
     fontsize=\small,
     numbersep=2mm,
-    style=xcode
+    style=xcode,
+    escapeinside=~~
   }
 }
 %
@@ -132,25 +154,36 @@
 \newcommand{\QEDsymbol}{\hfill$\square$}
 \newtcbtheorem[number within=section]{Example}{例}{%
   general,
-  colback=asahigreen!5, 
+  coltitle=asahigreen,
   colframe=asahigreen
 }{eg} % Example env
 \newtcbtheorem[number within=section]{Definition}{定义}{%
   general,
-  colback=miharipurple!5,
+  coltitle=miharipurple,
   colframe=miharipurple
 }{def} % Definition env
 \newtcbtheorem[number within=section]{Theorem}{定理}{%
   general,
-  colback=miharigold!5,
+  coltitle=miharigold,
   colframe=miharigold
 }{thm} % Theorem env
 \newtcbtheorem[number within=section]{Proposition}{命题}{%
-general,
-colback=asahibrown!5,
-colframe=asahibrown
-}{thm} % Proposition env
+  general,
+  coltitle=asahibrown,
+  colframe=asahibrown
+}{pro} % Proposition env
+\newtcbtheorem[number within=section]{Lemma}{引理}{%
+  general,
+  coltitle=miharired,
+  colframe=miharired
+}{lma} % Lemma env
+\newtcbtheorem[number within=section]{Corollary}{推论}{%
+  general,
+  coltitle=momijibrown,
+  colframe=momijibrown
+}{col} % Corollary env
 \newenvironment{Proof}{\textbf{证：}}{\QEDsymbol} % Proof env
+\newenvironment{Solve}{\textbf{解：}}{} % Solve env
 %
 % Code environment based on tcolorbox
 %
@@ -159,8 +192,8 @@ colframe=asahibrown
   listing engine=minted,
   minted language=#2,
   general,
-  colback=mahirolight,
   colframe=mahirodark,
+  coltitle=mahirodark,
   title=代码~\thetcbcounter:~#1
 }
 \DeclareTCBListing{Code*}{ !O{latex} }{
@@ -168,6 +201,5 @@ colframe=asahibrown
   listing engine=minted,
   minted language=#1,
   general,
-  colback=mahirolight,
   colframe=mahirodark
 }

@@ -3,10 +3,6 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, decorations}
 \usepackage{amsmath, tabularray, hyperref}
-\newminted{latex}{rulecolor=mahiropink2}
-\newminted{cpp}{rulecolor=mahirodark}
-\newminted{python}{rulecolor=asahigreen}
-\newminted{text}{rulecolor=asahibrown}
 \title{gunote \LaTeX{}笔记模板}
 \author{Gemini Usagi，School of Geodesy and Geodetic，Wuhan University}
 \date{\today}
@@ -18,6 +14,9 @@
 \begin{document}
 \maketitle
 \tableofcontents
+\thispagestyle{empty}
+\clearpage
+\pagenumbering{arabic}
 \chapter{章节测试}
 \section{字体测试}
 \textsf{gunote}模板为自用模板，基于\textsf{fontspec}宏包、\textsf{unicode-math}宏包和\textsf{ctex}宏包进行了自定义的字体设置。
@@ -70,7 +69,7 @@ fc-match -v 'TeX Gyre Pagella'
 \begin{Code*}[latex]
 \LoadClass[fontset=none]{ctexrep}
 \end{Code*}
-实现对\textsf{ctex}宏包的调用，同时声明自定义字体。中文默认宋体字族为思源宋体Source Han Serif CN，黑体字族为苹方字体.PingFang SC，楷体字族为系统默认楷体KaiTi.
+实现对\textsf{ctex}宏包的调用，同时声明自定义字体。中文默认宋体字族为思源宋体Source Han Serif CN，黑体字族为苹方字体\ .PingFang SC，楷体字族为系统默认楷体KaiTi.
 
 文中的很多场合需要用到加粗的文字来表示强调，此时推荐使用
 \begin{Code*}[latex]
@@ -175,9 +174,44 @@ fc-match -v 'TeX Gyre Pagella'
 部分颜色被有机地穿插进了文档的各个元素中。
 \section{自定义环境测试}
 \subsection{定理类环境}
-模板基于\textsf{tcolorbox}宏包定义了下面的定理类环境。
-\subsubsection{Example环境}
-样例如下：
+模板基于\textsf{tcolorbox}宏包定义了 \textsf{Example}, \textsf{Definition}, \textsf{Theorem}, \textsf{Proposition}, \textsf{Lemma}, \textsf{Corollary}这些常用的定理类环境。使用方法如下：
+\begin{Code}{定理类环境使用}[latex]
+% 带编号环境
+\begin{<~\textit{env name}~>}{<~\textit{title name}~>}{<~\textit{label name}~>}
+  <content>
+\end{<~\textit{env name}~>}
+% 不带编号环境
+\begin{<~\textit{env name}~>*}{<~\textit{title name}~>}
+  <content>
+\end{<~\textit{env name}~>*}
+% 引用
+\ref{<~\textit{env abbr}~>:<~\textit{label name}~>}
+\end{Code}
+代码中的 \textit{env abbr} 指的是环境的缩写，参考表~\ref{tab:Theorem env}~.
+\begin{table}[htbp]
+\centering
+\caption{\label{tab:Theorem env} 环境名称和缩写对应表}
+\begin{tblr}{
+    colspec={cc|cc}
+  }
+  \hline
+  环境名称 & 环境缩写 & 环境名称 & 环境缩写 \\
+  \hline
+  Example & eg & Definition & def \\
+  Theorem & thm & Proposition & pro \\
+  Lemma & lma & Corollary & col \\
+  \hline
+\end{tblr}
+\end{table}
+这样一来，你不需要自行定义 label ，只需要像下面这样使用：
+\begin{Code*}
+  \begin{Theorem}{泰勒定理}{Taylor}
+    ...
+  \end{Theorem}
+  ...
+  上述定理\ref{thm:Taylor}说明...
+\end{Code*}
+下面是这些自定义定理类环境的样式展示。
 \begin{Example}[halign lower=flush center, sidebyside]{单位复数群}{S1}
   第一个李群的例子，是最便于可视化的，在复数乘法下的单位复数。单位复数有着$\symbf{z}=\cos\theta+i\sin\theta$的形式。
 
@@ -185,32 +219,59 @@ fc-match -v 'TeX Gyre Pagella'
   \tcblower
   \includegraphics{picture/manifold.pdf}
 \end{Example}
-\subsubsection{Definition环境}
-样例如下：
 \begin{Definition}{数域}{field}
   设 $\symbb{K}$ 是复数集 $\symbb{C}$ 的子集且至少有两个不同的元素，如果 $\symbb{K}$ 中任意两个数的加法、减法、乘法和除法（除数不为零）仍属于 $\symbb{K}$ ，则称 $\symbb{K}$ 是一个数域。
 \end{Definition}
-\subsubsection{Theorem环境}
-样例如下：
 \begin{Theorem}{}{number field}
   任一数域必包含有理数域 $\symbb{Q}$ .
 \end{Theorem}
-\subsubsection{Proposition环境}
-样例如下：
 \begin{Proposition}{}{}
   零向量是唯一的。
 \end{Proposition}
-\subsubsection{Proof环境和QED符号}
-\textsf{Proof}环境比较灵活，由下面的定义得到：
+\begin{Lemma}{}{}
+  设 $A$,\ $B$ 是 $V$ 中两组向量， $A$ 含有 $r$ 个向量， $B$ 含有 $s$ 个向量，且 $A$ 中每个向量均可用 $B$ 中向量线性表示。如果 $A$ 中向量线性无关，则 $r\leq s$.
+\end{Lemma}
+\begin{Corollary}{}{}
+  $n$ 维线性空间 $V$ 中任一超过 $n$ 个向量的向量组必线性相关。
+\end{Corollary}
+此外，模板还定义了 \textsf{Proof}, \textsf{Solve} 环境，它们不是由 \textsf{tcolorbox} 定义得到的，而是由下面的定义得到：
 \begin{Code*}[latex]
 \newcommand{\QEDsymbol}{\hfill$\square$}
 \newenvironment{Proof}{\textbf{证：}}{\QEDsymbol} % Proof env
+\newenvironment{Solve}{\textbf{解：}}{} % Solve env
 \end{Code*}
-因此该环境不进行换行。除此之外，模板还提供了 \textsf{\backslash QEDsymbol} 命令表示证毕符号。样例如下：
+因此这些环境不进行换行。除此之外，模板还提供了 \textsf{\backslash QEDsymbol} 命令表示证毕符号。样例如下：
 
 \begin{Proof}
   由上面知道，$1$ 必属于任一数域。将 $1$ 连加 $n$ 次，则 $n$ 也应属于该属于，因此任一正整数属于该数域。又 $0-n=-n$ ，因此 $-n$ 也应在此数域中。因而整数全体都必须在这个数域之中。最后，若 $m\neq 0$,\ $m$,\ $n$ 为整数，则由除法封闭性可知 $\frac{n}{m}$ 也应属于该数域，即任一有理数都应在此数域中。
 \end{Proof}
+
+\begin{Solve}
+  设 $\symbfit{e}_1=(1,0,0)$,\ $\symbfit{e}_2=(0,1,0)$,\ $\symbfit{e}_3=(0,0,1)$ ，则从 $\{\symbfit{e}_1,\symbfit{e}_2,\symbfit{e}_3\}$ 到 $\{\symbfit{f}_1,\symbfit{f}_2,\symbfit{f}_3\}$ 的过渡矩阵为
+  \[
+    \symbfit{A}=\begin{pmatrix}
+      1 & 2 & 1 \\
+      0 & 1 & 1 \\
+      -1& 1 & 1
+    \end{pmatrix},
+  \]
+  从 $\{\symbfit{e}_1,\symbfit{e}_2,\symbfit{e}_3\}$ 到  $\{\symbfit{g}_1,\symbfit{g}_2,\symbfit{g}_3\}$ 的过渡矩阵为
+  \[
+    \symbfit{B}=\begin{pmatrix}
+      0 & -1 & 1 \\
+      1 & 1  & 2 \\
+      1 & 0  & 1
+    \end{pmatrix},
+  \]
+  则从 $\{\symbfit{f}_1,\symbfit{f}_2,\symbfit{f}_3\}$ 到  $\{\symbfit{g}_1,\symbfit{g}_2,\symbfit{g}_3\}$ 的过渡矩阵为 $\symbfit{A}^{-1}\symbfit{B}$ . 可以求得该矩阵为
+  \[
+    \symbfit{P}=\begin{pmatrix}
+      0 & 1 & 1 \\
+      -1&-3 &-2 \\
+      2 & 4 & 4
+    \end{pmatrix}.
+  \]
+\end{Solve}
 \subsection{代码环境}
 模板基于\textsf{tcolorbox}宏包和\textsf{minted}宏包定义了下面的代码环境\textsf{Code}，效果如下：
 \begin{Code}{test.tex}
